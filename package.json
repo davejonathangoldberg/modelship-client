@@ -1,0 +1,26 @@
+{
+  "name": "modelship",
+  "version": "1.0.0",
+  "description": "Visually create and deploy APIs without code",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "apis",
+    "hypermedia"
+  ],
+  "author": "Ritc",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.9.1",
+    "errorhandler": "^1.2.2",
+    "express": "^4.10.0",
+    "express-session": "^1.9.1",
+    "method-override": "^2.3.0",
+    "morgan": "^1.4.1",
+    "multer": "^0.1.6",
+    "serve-favicon": "^2.1.6",
+    "socket.io": "^1.2.0"
+  }
+}

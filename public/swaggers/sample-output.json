@@ -1,0 +1,798 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "test1024_5"
+  },
+  "host": "morning-taiga-9546.herokuapp.com",
+  "basePath": "",
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json",
+    "application/json+hal"
+  ],
+  "produces": [
+    "application/json",
+    "application/json+hal"
+  ],
+  "paths": {
+    "/speakers": {
+      "get": {
+        "tags": [
+                    "speakers"
+                ],
+        "summary": "speakers",
+        "description": "Retrieve collection of speakers",
+        "responses": {
+          "200": {
+            "description": "An array of speakers",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/speakers"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+                    "speakers"
+                ],
+        "parameters": [
+          {
+            "name": "speakers",
+            "in": "body",
+            "description": "speakers to create",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/speakers"
+            }
+          }
+        ],
+        "summary": "speakers",
+        "description": "Create an individual instance of speakers",
+        "responses": {
+          "201": {
+            "description": "An instance of speakers",
+            "schema": {
+              "$ref": "#/definitions/speakers"
+            }
+          }
+        }
+      }
+    },
+    "/speakers/{speakersInstanceId}": {
+      "get": {
+        "tags": [
+                    "speakers"
+                ],
+        "parameters": [
+          {
+            "name": "speakersInstanceId",
+            "in": "path",
+            "description": "ID for an instance of speakers",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "summary": "speakers",
+        "description": "Retrieve individual instance of speakers",
+        "responses": {
+          "200": {
+            "description": "A single instance of speakers",
+            "schema": {
+              "$ref": "#/definitions/speakers"
+            }
+          }
+        }
+      },
+      "put": {
+        "parameters": [
+          {
+            "name": "speakersInstanceId",
+            "in": "path",
+            "description": "ID for an instance of speakers",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "speakers",
+            "in": "body",
+            "description": "speakers to insert",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/speakers"
+            }
+          }
+        ],
+        "summary": "speakers",
+        "description": "Update individual instance of speakers",
+        "responses": {
+          "200": {
+            "description": "Updated a single instance of speakers",
+            "schema": {
+              "$ref": "#/definitions/speakers"
+            }
+          }
+        }
+      },
+      "delete": {
+        "parameters": [
+          {
+            "name": "speakersInstanceId",
+            "in": "path",
+            "description": "ID for an instance of speakers",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "summary": "speakers",
+        "description": "Retrieve individual instance of speakers",
+        "responses": {
+          "204": {
+            "description": "A single instance of speakers"
+          }
+        }
+      }
+    },
+    "/speakers/{speakersInstanceId}/topics": {
+      "get": {
+        "parameters": [
+          {
+            "name": "speakersInstanceId",
+            "in": "path",
+            "description": "ID for an instance of speakers",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "summary": "topics",
+        "description": "Retrieve collection of topics",
+        "responses": {
+          "200": {
+            "description": "An array of topics",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/topics"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "parameters": [
+          {
+            "name": "speakersInstanceId",
+            "in": "path",
+            "description": "ID for an instance of speakers",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "topics",
+            "in": "body",
+            "description": "topics to create",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/topics"
+            }
+          }
+        ],
+        "summary": "topics",
+        "description": "Create an individual instance of topics",
+        "responses": {
+          "201": {
+            "description": "An instance of topics",
+            "schema": {
+              "$ref": "#/definitions/topics"
+            }
+          }
+        }
+      }
+    },
+    "/speakers/{speakersInstanceId}/topics/{topicsInstanceId}": {
+      "get": {
+        "parameters": [
+          {
+            "name": "speakersInstanceId",
+            "in": "path",
+            "description": "ID for an instance of speakers",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "topicsInstanceId",
+            "in": "path",
+            "description": "ID for an instance of topics",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "summary": "topics",
+        "description": "Retrieve individual instance of topics",
+        "responses": {
+          "200": {
+            "description": "A single instance of topics",
+            "schema": {
+              "$ref": "#/definitions/topics"
+            }
+          }
+        }
+      },
+      "put": {
+        "parameters": [
+          {
+            "name": "speakersInstanceId",
+            "in": "path",
+            "description": "ID for an instance of speakers",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "topicsInstanceId",
+            "in": "path",
+            "description": "ID for an instance of topics",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "topics",
+            "in": "body",
+            "description": "topics to insert",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/topics"
+            }
+          }
+        ],
+        "summary": "topics",
+        "description": "Update individual instance of topics",
+        "responses": {
+          "200": {
+            "description": "Updated a single instance of topics",
+            "schema": {
+              "$ref": "#/definitions/topics"
+            }
+          }
+        }
+      },
+      "delete": {
+        "parameters": [
+          {
+            "name": "speakersInstanceId",
+            "in": "path",
+            "description": "ID for an instance of speakers",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "topicsInstanceId",
+            "in": "path",
+            "description": "ID for an instance of topics",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "summary": "topics",
+        "description": "Retrieve individual instance of topics",
+        "responses": {
+          "204": {
+            "description": "A single instance of topics"
+          }
+        }
+      }
+    },
+    "/speakers/{speakersInstanceId}/email_addresses": {
+      "get": {
+        "parameters": [
+          {
+            "name": "speakersInstanceId",
+            "in": "path",
+            "description": "ID for an instance of speakers",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "summary": "email_addresses",
+        "description": "Retrieve collection of email_addresses",
+        "responses": {
+          "200": {
+            "description": "An array of email_addresses",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/email_addresses"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "parameters": [
+          {
+            "name": "speakersInstanceId",
+            "in": "path",
+            "description": "ID for an instance of speakers",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "email_addresses",
+            "in": "body",
+            "description": "email_addresses to create",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/email_addresses"
+            }
+          }
+        ],
+        "summary": "email_addresses",
+        "description": "Create an individual instance of email_addresses",
+        "responses": {
+          "201": {
+            "description": "An instance of email_addresses",
+            "schema": {
+              "$ref": "#/definitions/email_addresses"
+            }
+          }
+        }
+      }
+    },
+    "/speakers/{speakersInstanceId}/email_addresses/{email_addressesInstanceId}": {
+      "get": {
+        "parameters": [
+          {
+            "name": "speakersInstanceId",
+            "in": "path",
+            "description": "ID for an instance of speakers",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "email_addressesInstanceId",
+            "in": "path",
+            "description": "ID for an instance of email_addresses",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "summary": "email_addresses",
+        "description": "Retrieve individual instance of email_addresses",
+        "responses": {
+          "200": {
+            "description": "A single instance of email_addresses",
+            "schema": {
+              "$ref": "#/definitions/email_addresses"
+            }
+          }
+        }
+      },
+      "put": {
+        "parameters": [
+          {
+            "name": "speakersInstanceId",
+            "in": "path",
+            "description": "ID for an instance of speakers",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "email_addressesInstanceId",
+            "in": "path",
+            "description": "ID for an instance of email_addresses",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "email_addresses",
+            "in": "body",
+            "description": "email_addresses to insert",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/email_addresses"
+            }
+          }
+        ],
+        "summary": "email_addresses",
+        "description": "Update individual instance of email_addresses",
+        "responses": {
+          "200": {
+            "description": "Updated a single instance of email_addresses",
+            "schema": {
+              "$ref": "#/definitions/email_addresses"
+            }
+          }
+        }
+      },
+      "delete": {
+        "parameters": [
+          {
+            "name": "speakersInstanceId",
+            "in": "path",
+            "description": "ID for an instance of speakers",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "email_addressesInstanceId",
+            "in": "path",
+            "description": "ID for an instance of email_addresses",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "summary": "email_addresses",
+        "description": "Retrieve individual instance of email_addresses",
+        "responses": {
+          "204": {
+            "description": "A single instance of email_addresses"
+          }
+        }
+      }
+    },
+    "/topics": {
+      "get": {
+        "summary": "topics",
+        "description": "Retrieve collection of topics",
+        "responses": {
+          "200": {
+            "description": "An array of topics",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/topics"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "parameters": [
+          {
+            "name": "topics",
+            "in": "body",
+            "description": "topics to create",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/topics"
+            }
+          }
+        ],
+        "summary": "topics",
+        "description": "Create an individual instance of topics",
+        "responses": {
+          "201": {
+            "description": "An instance of topics",
+            "schema": {
+              "$ref": "#/definitions/topics"
+            }
+          }
+        }
+      }
+    },
+    "/topics/{topicsInstanceId}": {
+      "get": {
+        "parameters": [
+          {
+            "name": "topicsInstanceId",
+            "in": "path",
+            "description": "ID for an instance of topics",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "summary": "topics",
+        "description": "Retrieve individual instance of topics",
+        "responses": {
+          "200": {
+            "description": "A single instance of topics",
+            "schema": {
+              "$ref": "#/definitions/topics"
+            }
+          }
+        }
+      },
+      "put": {
+        "parameters": [
+          {
+            "name": "topicsInstanceId",
+            "in": "path",
+            "description": "ID for an instance of topics",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "topics",
+            "in": "body",
+            "description": "topics to insert",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/topics"
+            }
+          }
+        ],
+        "summary": "topics",
+        "description": "Update individual instance of topics",
+        "responses": {
+          "200": {
+            "description": "Updated a single instance of topics",
+            "schema": {
+              "$ref": "#/definitions/topics"
+            }
+          }
+        }
+      },
+      "delete": {
+        "parameters": [
+          {
+            "name": "topicsInstanceId",
+            "in": "path",
+            "description": "ID for an instance of topics",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "summary": "topics",
+        "description": "Retrieve individual instance of topics",
+        "responses": {
+          "204": {
+            "description": "A single instance of topics"
+          }
+        }
+      }
+    },
+    "/topics/{topicsInstanceId}/speakers": {
+      "get": {
+        "parameters": [
+          {
+            "name": "topicsInstanceId",
+            "in": "path",
+            "description": "ID for an instance of topics",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "summary": "speakers",
+        "description": "Retrieve collection of speakers",
+        "responses": {
+          "200": {
+            "description": "An array of speakers",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/speakers"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "parameters": [
+          {
+            "name": "topicsInstanceId",
+            "in": "path",
+            "description": "ID for an instance of topics",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "speakers",
+            "in": "body",
+            "description": "speakers to create",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/speakers"
+            }
+          }
+        ],
+        "summary": "speakers",
+        "description": "Create an individual instance of speakers",
+        "responses": {
+          "201": {
+            "description": "An instance of speakers",
+            "schema": {
+              "$ref": "#/definitions/speakers"
+            }
+          }
+        }
+      }
+    },
+    "/topics/{topicsInstanceId}/speakers/{speakersInstanceId}": {
+      "get": {
+        "parameters": [
+          {
+            "name": "topicsInstanceId",
+            "in": "path",
+            "description": "ID for an instance of topics",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "speakersInstanceId",
+            "in": "path",
+            "description": "ID for an instance of speakers",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "summary": "speakers",
+        "description": "Retrieve individual instance of speakers",
+        "responses": {
+          "200": {
+            "description": "A single instance of speakers",
+            "schema": {
+              "$ref": "#/definitions/speakers"
+            }
+          }
+        }
+      },
+      "put": {
+        "parameters": [
+          {
+            "name": "topicsInstanceId",
+            "in": "path",
+            "description": "ID for an instance of topics",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "speakersInstanceId",
+            "in": "path",
+            "description": "ID for an instance of speakers",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "speakers",
+            "in": "body",
+            "description": "speakers to insert",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/speakers"
+            }
+          }
+        ],
+        "summary": "speakers",
+        "description": "Update individual instance of speakers",
+        "responses": {
+          "200": {
+            "description": "Updated a single instance of speakers",
+            "schema": {
+              "$ref": "#/definitions/speakers"
+            }
+          }
+        }
+      },
+      "delete": {
+        "parameters": [
+          {
+            "name": "topicsInstanceId",
+            "in": "path",
+            "description": "ID for an instance of topics",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "speakersInstanceId",
+            "in": "path",
+            "description": "ID for an instance of speakers",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "summary": "speakers",
+        "description": "Retrieve individual instance of speakers",
+        "responses": {
+          "204": {
+            "description": "A single instance of speakers"
+          }
+        }
+      }
+    },
+    "/details": {
+      "get": {
+        "summary": "details",
+        "description": "Retrieve details",
+        "responses": {
+          "200": {
+            "description": " details resource",
+            "schema": {
+              "$ref": "#/definitions/details"
+            }
+          }
+        }
+      },
+      "put": {
+        "parameters": [
+          {
+            "name": "details",
+            "in": "body",
+            "description": "details to update",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/details"
+            }
+          }
+        ],
+        "summary": "details",
+        "description": "Update individual instance of details",
+        "responses": {
+          "200": {
+            "description": "Update a details",
+            "schema": {
+              "$ref": "#/definitions/details"
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "details",
+        "description": "Retrieve details",
+        "responses": {
+          "204": {
+            "description": "details"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "speakers": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "employer": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "topics": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "email_addresses": {
+      "properties": {
+        "emailAddress": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "details": {
+      "properties": {
+        "location": {
+          "type": "string"
+        },
+        "time": {
+          "type": "number"
+        },
+        "id": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  }
+}
