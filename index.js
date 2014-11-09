@@ -30,10 +30,10 @@ app.get('/', function(req, res, next){
 
 app.post('/apis', function(req, res, next){
   var inputInterface = req.body;
-  inputInterface.webhookUrl = 'http://104-236-22-53-gp1b5lanrks0.runscope.net/inbound_hooks';
+  inputInterface.webhookUrl = process.env['WEBHOOK_URL'];
   console.log('inputInterface: ' + JSON.stringify(inputInterface));
   var options = {
-    hostname: '104-131-83-125-gp1b5lanrks0.runscope.net',
+    hostname: process.env['API_URL'],
     port: 80,
     path: '/apis',
     method: 'POST',
@@ -77,6 +77,7 @@ app.post('/apis', function(req, res, next){
 });
 
 app.post('/inbound_hooks', function(req, res, next){
+  console.log('\n\ninbound_hooks');
   console.log('req.body: ' + JSON.stringify(req.body));
   console.log('req.path: ' + req.path);
   console.log('req.protocol: ' + req.protocol);
