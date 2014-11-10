@@ -104,6 +104,5 @@ app.all('*', function(req, res){
   var errorMessage = "Invalid or Unsupported Request. Please check your input and try again.";
   var errorTemplate = { "requestRoute" : req.path, "message" : errorMessage };
   res.set('Content-Type', app.mediaType);
-  res.statusCode = 400;
-  res.json(400, errorTemplate);
+  res.status(400).json(errorTemplate);
 }); // RETURN ERROR FOR ANYTHING THAT OTHERWISE HASN'T BEEN CAUGHT

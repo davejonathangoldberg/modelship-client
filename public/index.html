@@ -104,6 +104,15 @@
 	  font-family: "Lucida Grande", "Lucida Sans Unicode", sans-serif;
 	}
 	
+	#modal-content {
+	  text-align: center;
+	  background-color: #c9e0ff;
+	}
+	
+	.modal-header, .modal-footer {
+	  border: 0px solid; 
+	}
+	
   </style>
   </head>
 
@@ -155,13 +164,11 @@
 		  </div>
 		</div>
       </div>
-<!-- 
-      <h3>Two columns with two nested columns</h3>
-      <p>Per the documentation, nesting is easy—just put a row of columns within an existing column. This gives you two columns <strong>starting at desktops and scaling to large desktops</strong>, with another two (equal widths) within the larger column.</p>
-      <p>At mobile device sizes, tablets and down, these columns and their nested columns will stack.</p>
+
+      <h3>Modal Test</h3>
       <div class="row">
         <div class="col-md-8">
-          .col-md-8
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Small modal</button>
           <div class="row">
             <div class="col-md-6">.col-md-6</div>
             <div class="col-md-6">.col-md-6</div>
@@ -169,7 +176,7 @@
         </div>
         <div class="col-md-4">.col-md-4</div>
       </div>
-
+<!-- 
       <hr>
 
       <h3>Mixed: mobile and desktop</h3>
@@ -204,10 +211,26 @@
 
     </div> <!-- /container -->
 
+<div class="modal fade bs-example-modal-sm" id="waiting" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content" id="modal-content">
+      <div class="modal-header">
+      </div>
+	  <div class="modal-body">
+        <span style="display: block">Your API is being deployed.</span>
+		<span style="display: block">(It only takes a minute)</span>
+		<span id="modal-notification"></span>
+      </div>
+	  <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="http://getbootstrap.com/assets/js/ie10-viewport-bug-workaround.js"></script>
 	<script src="js/jquery-2.1.1-min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script> 
 	<script src="js/ace.js" type="text/javascript" charset="utf-8"></script>
 	<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
 	<script src="js/modelship.js" type="text/javascript" charset="utf-8"></script>
@@ -217,12 +240,14 @@
 		editor.setTheme("ace/theme/dawn");
 		editor.getSession().setMode("ace/mode/json");
 		loadSample('todo_api_sample');
+		
 		editor.getSession().on('change', function(e) {
 		  if($('#error-message').css("display") == 'block'){
 			$('#error-message').css("display", "none").html('');
 			$('#makeAPIButton').addClass("btn-success").removeClass("btn-danger").html('Make my API!');
 		  }
 		});
+		
 		function getCurrentInput(callback) {
 		  var currentValue = tryParseJSON(editor.getValue()); // or session.getValue
 		  if (currentValue){
@@ -272,18 +297,36 @@
 		  });	
 		}
 		
+		function pageReady(apiData) {
+		  confirmSuccess(apiData, loadSwagger);
+		}
+	  
+		function confirmSuccess(apiData, callback) {
+		  setTimeout(function() {
+			  console.log('API is ready.');
+			  $('#modal-notification').html('<h3>Your API is ready.</h3><p>You will now be redirected to a Swagger client to start using it.</p>');
+			  if(typeof callback == 'function')
+				  callback(apiData);
+		  }, 500);
+		};
+	  
+		function loadSwagger(apiData) {
+		  setTimeout(function() {
+			window.location = "swagger.html?url=" + apiData._links.swaggerApiDescription.href;
+		  }, 2000);
+		};
+		
 		jQuery(function($){
 		  
 		  // GET INPUT VALUE
 		  $( "#makeAPIButton" ).click(function() {
-			var newAppId = 'nxh4fz6gutz0vn29';
+			$('#waiting').modal('show');
 			getCurrentInput(function(err, indata){
 			  if(err){
 				console.log(err);
 			  } else {
 				sendInput(indata);
 			  }
-			  
 			});
 		  });
 		  
@@ -293,7 +336,7 @@
 		  
 		  socket.on('appReady', function (data) {
 			console.log('appReady: ' + JSON.stringify(data));
-			console.log(data.apiName);
+			pageReady(data);
 		  });
 		  
 		  
