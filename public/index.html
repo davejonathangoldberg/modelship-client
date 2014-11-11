@@ -192,6 +192,7 @@
 	<script>
 		var socket = io();
 		var editor = ace.edit("editor");
+		var maxWaitMs = 90000; // WAIT A MAXIMUM OF 90 SECONDS BEFORE POLLING API
 		editor.setTheme("ace/theme/dawn");
 		editor.getSession().setMode("ace/mode/json");
 		loadSample('todo_api_sample');
@@ -239,13 +240,14 @@
 			  console.log( JSON.stringify(data) );
 			  socket.emit('newApp', data.id);
 			  console.log('newAppId: ' + data.id);
+			  waitTimeOut(data);
 			})
 			.fail(function(data) {
 			  //alert(data.responseText);
 			  var errorMessage = JSON.parse(data.responseText);
-			  $('#waiting').modal('show');
+			  $('#waiting').modal('hide');
 			  $('#error-message').css("display", "block").html(errorMessage.value);
-			  $('#makeAPIButton').removeClass("btn-success").addClass("btn-danger").html('Validation Error!');
+			  $('#makeAPIButton').removeClass("btn-success").addClass("btn-danger").html('API Error!');
 			  window.scrollTo(0, 0);
 			})
 			.always(function() {
@@ -271,6 +273,43 @@
 			window.location = "swagger.html?url=" + apiData._links.swaggerApiDescription.href;
 		  }, 2000);
 		};
+		
+		function waitTimeOut(apiData) {
+		  setTimeout(function() {
+			console.log('Page Timeout. Poll for API.');
+			$.ajax({
+			  url: apiData._links.self.href,
+			  type: "GET",
+			  dataType: "json"
+			})
+			  .done(function( data ) {
+				console.log( 'Polled API results: ' + JSON.stringify(data) );
+				checkStatus(data);
+			  })
+			  .fail(function(data) {
+				//alert(data.responseText);
+				var errorMessage = JSON.parse(data.responseText);
+				$('#waiting').modal('hide');
+				$('#error-message').css("display", "block").html("Something went wrong with your API. Please try again later.");
+				$('#makeAPIButton').removeClass("btn-success").addClass("btn-danger").html('API Error!');
+				window.scrollTo(0, 0);
+			  })
+			  .always(function() {
+				console.log( "Wait Timeout AJAX Fired." );
+			});
+		  }, maxWaitMs);
+		};
+		
+		function checkStatus(data){
+		  if(data.status == 'active') {
+			pageReady(data);
+		  } else {
+			$('#waiting').modal('hide');
+			$('#error-message').css("display", "block").html("Something went wrong with your API. Please try again later.");
+			$('#makeAPIButton').removeClass("btn-success").addClass("btn-danger").html('API Error!');
+			window.scrollTo(0, 0);
+		  }
+		}
 		
 		jQuery(function($){
 		  
