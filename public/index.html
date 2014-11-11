@@ -288,6 +288,7 @@
 			.fail(function(data) {
 			  //alert(data.responseText);
 			  var errorMessage = JSON.parse(data.responseText);
+			  $('#waiting').modal('show');
 			  $('#error-message').css("display", "block").html(errorMessage.value);
 			  $('#makeAPIButton').removeClass("btn-success").addClass("btn-danger").html('Validation Error!');
 			  window.scrollTo(0, 0);
