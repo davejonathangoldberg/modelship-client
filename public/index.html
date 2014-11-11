@@ -113,6 +113,116 @@
 	  border: 0px solid; 
 	}
 	
+	.loader {
+	  display: inline-block;
+	  width: 30px;
+	  height: 30px;
+	  position: relative;
+	  border: 4px solid #1f8dd6;
+	  margin-top: 15px;
+	  animation: loader 4s infinite ease;
+	  -moz-animation: loader 4s infinite ease;
+	  -webkit-animation: loader 4s infinite ease;
+	}
+	
+	.loader-inner {
+	  vertical-align: top;
+	  display: inline-block;
+	  width: 100%;
+	  background-color: #1f8dd6;
+	  animation: loader-inner 4s infinite ease-in;
+	  -moz-animation: loader-inner 4s infinite ease-in;
+	  -webkit-animation: loader-inner 4s infinite ease-in;
+	}
+	
+	@keyframes loader {
+	  0% {
+		transform: rotate(0deg);
+	  }
+	  
+	  25% {
+		transform: rotate(180deg);
+	  }
+	  
+	  50% {
+		transform: rotate(180deg);
+	  }
+	  
+	  75% {
+		transform: rotate(360deg);
+	  }
+	  
+	  100% {
+		transform: rotate(360deg);
+	  }
+	}
+	
+	@-webkit-keyframes loader {
+	  0% {
+		transform: rotate(0deg);
+	  }
+	  
+	  25% {
+		transform: rotate(180deg);
+	  }
+	  
+	  50% {
+		transform: rotate(180deg);
+	  }
+	  
+	  75% {
+		transform: rotate(360deg);
+	  }
+	  
+	  100% {
+		transform: rotate(360deg);
+	  }
+	}
+	
+	@keyframes loader-inner {
+	  0% {
+		height: 0%;
+	  }
+	  
+	  25% {
+		height: 0%;
+	  }
+	  
+	  50% {
+		height: 100%;
+	  }
+	  
+	  75% {
+		height: 100%;
+	  }
+	  
+	  100% {
+		height: 0%;
+	  }
+	}
+	
+	@-webkit-keyframes loader-inner {
+	  0% {
+		height: 0%;
+	  }
+	  
+	  25% {
+		height: 0%;
+	  }
+	  
+	  50% {
+		height: 100%;
+	  }
+	  
+	  75% {
+		height: 100%;
+	  }
+	  
+	  100% {
+		height: 0%;
+	  }
+	}
+	
   </style>
   </head>
 
@@ -174,6 +284,7 @@
 	  <div class="modal-body">
         <span style="display: block">Your API is being deployed.</span>
 		<span style="display: block">(It only takes a minute)</span>
+		<span class="loader"><span class="loader-inner"></span></span>
 		<span id="modal-notification"></span>
       </div>
 	  <div class="modal-footer">
@@ -262,6 +373,7 @@
 		function confirmSuccess(apiData, callback) {
 		  setTimeout(function() {
 			  console.log('API is ready.');
+			  $('.loader').hide() ;
 			  $('#modal-notification').html('<h3>Your API is ready.</h3><p>You will now be redirected to a Swagger client to start using it.</p>');
 			  if(typeof callback == 'function')
 				  callback(apiData);
@@ -316,13 +428,13 @@
 		  // GET INPUT VALUE
 		  $( "#makeAPIButton" ).click(function() {
 			$('#waiting').modal('show');
-			getCurrentInput(function(err, indata){
+			/*getCurrentInput(function(err, indata){
 			  if(err){
 				console.log(err);
 			  } else {
 				sendInput(indata);
 			  }
-			});
+			});*/
 		  });
 		  
 		  $( ".sample_api" ).click(function(event) {
