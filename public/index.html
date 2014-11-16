@@ -13,6 +13,7 @@
 
     <!-- Bootstrap core CSS -->
     <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/modelship.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
 	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
@@ -349,9 +350,9 @@
 		  })
 			.done(function( data ) {
 			  console.log( JSON.stringify(data) );
-			  socket.emit('newApp', data.id);
 			  console.log('newAppId: ' + data.id);
-			  waitTimeOut(data);
+			  window.location = 'http://www.modelship.io/status.html?id=' + data.id;
+			  
 			})
 			.fail(function(data) {
 			  //alert(data.responseText);

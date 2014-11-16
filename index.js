@@ -28,6 +28,49 @@ app.get('/', function(req, res, next){
   return res.send('Success');
 });
 
+app.get('/apis/:id', function(req, res, next){
+  console.log('API Param ID: ' + req.params['id']);
+  var options = {
+    hostname: process.env['API_URL'],
+    port: 80,
+    path: '/apis/' + req.params['id'],
+    method: 'GET',
+    headers: {
+      "Accept" : "application/json"
+    }
+  };
+  
+  var httpRequest = http.request(options, function(httpRes) {
+    var responseString = '';
+    var responseData;
+    console.log('RESPONSE STATUS: ' + res.statusCode);
+    console.log('RESPONSE HEADERS: ' + JSON.stringify(res.headers));
+    httpRes.setEncoding('utf8');
+    httpRes.on('data', function (chunk) {
+      console.log('BODY: ' + chunk);
+      responseString += chunk;
+    });
+    httpRes.on('end', function() {
+      responseData = JSON.parse(responseString);
+      if((httpRes.statusCode === 200) || (httpRes.statusCode === 201) || (httpRes.statusCode === 202)){
+        console.log('equal to 200, 201, 202');
+        return res.status(httpRes.statusCode).json(responseData);
+      } else {
+        console.log('not equal to 200, 201, 202');
+        return res.status(httpRes.statusCode).json(responseData);
+      }
+    });
+  });
+  
+  httpRequest.on('error', function(e) {
+    console.log('problem with request: ' + e.message);
+    return res.status(500).json({"errorCode" : 1, "errorDetails" : "Something went wrong"});
+  });
+  
+  // write data to request body
+  httpRequest.end();
+});
+
 app.post('/apis', function(req, res, next){
   var inputInterface = req.body;
   inputInterface.webhookUrl = process.env['WEBHOOK_URL'];

@@ -25,7 +25,7 @@ module.exports = function App() {
   app.mediaType = 'application/json';
   
   app.set('views', __dirname + '/views');
-  app.use('*', function(req, res, next){
+  app.use('/swagger', function(req, res, next){
     res.set('Access-Control-Allow-Origin', '*');
     res.set('Access-Control-Allow-Methods', 'GET, POST, DELETE, PUT, PATCH, OPTIONS');
     res.set('Access-Control-Allow-Headers', 'Content-Type, api_key, Authorization');
