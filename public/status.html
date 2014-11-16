@@ -55,26 +55,25 @@
     <div class="container-fluid">
 	  <div class="row">
 		<div class="col-md-12">
-		  <div id="api-name-header">
-			<h1>API Name: </h1>
+		  <div id="error-box">
+			<div id="status-message" class="alert alert-warning" role="alert">Your API is on its way. In the meantime, please check out the API Guide and ModelShip documentation.</div>
 		  </div>
 		</div>
 	  </div>
 	  <div class="row">
-		<div class="col-md-5">
+		<div class="col-md-8 col-sm-12">
 		  <table class="table table-condensed">
+			<tr>
+			  <th colspan=2>
+				<div id="api-name-header">
+				  <h1>API Name: </h1>
+				</div>
+			  </th>
+			</tr>
 			<tr>
 			  <th>ID:</th>
 			  <td id="modelship-id"></td>
 			</tr>
-			<tr>
-			  <th>URL:</th>
-			  <td id="modelship-url"><a href="http://www.modelship.io/status.html?id=">http://www.modelship.io/status.html?id=</a></td>
-			</tr>
-		  </table>
-		</div>
-		<div class="col-md-3">
-		  <table class="table table-condensed">
 			<tr>
 			  <th>API Status:</th>
 			  <td class="status">
@@ -87,46 +86,43 @@
 			  </td>
 			</tr>
 			<tr>
-			  <th>Save API Details:</th>
-			  <td><a href="https://dl.dropboxusercontent.com/s/deroi5nwm6u7gdf/advice.png" class="dropbox-saver"></a></td>
+			  <th>API URL:</th>
+			  <td id="api-url"></td>
+			</tr>
+			<tr>
+			  <th>Swagger URL:</th>
+			  <td id="swagger-url"></td>
 			</tr>
 		  </table>
 		</div>
-	  </div>
-	  
-      <div class="row">
-        <div class="col-md-3 col-sm-6">
-		  <div class="feature-box" id="feature-try">
-			<span data-toggle="tooltip" data-placement="left" title="Once your API is deployed on ModelShip, you can use it for free for 7 days." class="feature-hint"></span>
-			<div class="feature-headline" id="feature-try-text">TRY</div>
-			<div class="spinner">
-			  <span id="waiting-text">Waiting for API</span>
-			  <div class="bounce1"></div>
-			  <div class="bounce2"></div>
-			  <div class="bounce3"></div>
+		<div class="col-md-4">
+		  <table class="table table-condensed">
+			<div class="row">
+			  <div class="col-md-12">
+				<h1>Next Steps</h1>
+			  </div>
 			</div>
-			<div class="api-ready"></div>
-		  </div>
+			<div class="row">
+			  <div class="col-md-10 col-md-offset-1 col-lg-9 col-lg-offset-1 col-sm-6 col-xs-6">
+				<a href="#">
+				  <div class="feature-box" id="fb-api-guide">
+					<span data-toggle="tooltip" data-placement="left" title="The API Guide will walk you through your new API's design and capabilities." class="feature-hint"></span>
+					<div class="feature-headline">GUIDE</div>
+				  </div>
+				</a>
+			  </div>
+			  <div class="col-md-10 col-md-offset-1 col-lg-9 col-lg-offset-1 col-sm-6 col-xs-6">
+				<a id="swagger-box-link" href="#">
+				  <div class="feature-box" id="swagger-box" style="display: none">
+					<span data-toggle="tooltip" data-placement="left" title="Use your API here using Swagger. Swagger gives you interactive documentation for your API." class="feature-hint"></span>
+					<div class="feature-headline" id="feature-headline-swagger">TRY IT OUT</div>
+				  </div>
+				</a>
+			  </div>
+			</div>
+		  </table>
 		</div>
-		<div class="col-md-3 col-sm-6">
-		  <div class="feature-box" id="fb-api-guide">
-			<span data-toggle="tooltip" data-placement="left" title="The API Guide will walk you through your new API's design and capabilities." class="feature-hint"></span>
-			<div class="feature-headline">GUIDE</div>
-		  </div>
-		</div>
-		<div class="col-md-3 col-sm-6">
-		  <div class="feature-box" id="swagger-file">
-			<span data-toggle="tooltip" data-placement="left" title="Swagger gives you interactive documentation for your API. Get your Swagger API spec here." class="feature-hint"></span>
-			<div class="feature-headline">SWAGGER</div>
-		  </div>
-		</div>
-		<div class="col-md-3 col-sm-6">
-		  <div class="feature-box" id="deploy-api">
-			<span data-toggle="tooltip" data-placement="left" title="Soon you'll be able to deploy this API to your own cloud host (coming soon)." class="feature-hint"></span>
-			<div class="feature-headline">DEPLOY</div>
-		  </div>
-		</div>
-      </div>
+	  </div>
     </div> <!-- /container -->
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
@@ -190,11 +186,14 @@
 	function pageReady(apiData) {
 	  $(".status").css("color", "#21D145");
 	  $(".sm-spinner").html('Active <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>');
-	  $(".spinner").hide();
-	  $(".api-ready").css("display", "block");
-	  $("#feature-try").wrap('<a href="http://www.modelship.io/swagger.html?url=' + apiData._links.swaggerApiDescription.href + '"></a>');
-	  $("#feature-try-text").html('<a href="http://www.modelship.io/swagger.html?url=' + apiData._links.swaggerApiDescription.href + '">TRY</a>');
+	  //$(".spinner").hide();
+	  $("#swagger-box").show(500)
+	  $("#feature-headline-swagger").html('<a href="http://www.modelship.io/swagger.html?url=' + apiData._links.swaggerApiDescription.href + '">TRY IT OUT</a>');
+	  $("#swagger-box-link").attr('href', 'http://www.modelship.io/swagger.html?url=' + apiData._links.swaggerApiDescription.href);
 	  $("#api-name-header h1").append(apiData.apiName);
+	  $("#api-url").html('<a href="' + apiData._links.deployedApi.href + '">' + apiData._links.deployedApi.href + '</a>');
+	  $("#swagger-url").html('<a href="http://www.modelship.io/swagger.html?url=' + apiData._links.swaggerApiDescription.href + '">http://www.modelship.io/swagger.html?url=' + apiData._links.swaggerApiDescription.href + '</a>');
+	  $('#status-message').hide(400);
 	}
 		
 		
