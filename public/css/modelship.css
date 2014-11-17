@@ -378,3 +378,10 @@
     a #feature-try:hover {
       background-color: #e0fde0;
     }
+    
+    #api-info-box {
+      display: block;
+      background-color: rgba(255,255,255,0.5);
+      padding: 0 15px 15px 15px;
+      border: 1px solid #000;
+    }
