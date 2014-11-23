@@ -274,11 +274,11 @@ In the ModelShip paradigm, I could accomplish this easily by specifying this rel
 <p>That's all there is to it. We just added a students resource at the top level, and when you publish your API, the relationship between that top-level resource and the nested students resource under classrooms is automatically established. </p>
 <p>So if you were to add a few students to a certain classroom with the following call (one for each new student): 
     POST /classrooms/{classroomId}/students</p>
-<p>Éthose students would show up the next time you made a call to:
+<p>...those students would show up the next time you made a call to:
     GET /students</p>
 <p>On the other hand, if you were to add a student with the following call:
     POST /students</p>
-<p>Éthat student would NOT show up under any classroom, because that student was created without a relationship to a classroom.</p>
+<p>...that student would NOT show up under any classroom, because that student was created without a relationship to a classroom.</p>
 <p>Let's take it one final step. You've now created a students resource at the top level, and a students resource that is a child to a classrooms resource. But what about when you've created a student at the top level, and then later want to add that student to a classroom? Again, this is made easy within the structure of the resources array. </p>
 <pre class="prettyprint well"><code>"resources" : [
     { 
