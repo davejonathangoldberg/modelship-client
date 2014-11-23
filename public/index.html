@@ -29,19 +29,6 @@
 	padding-top: 70px;
 	background-color: #c9e0ff;
   }
-  
-  .headline {
-	  font-size: 100px;
-	  font-family: 'Open Sans', sans-serif;
-	  text-align: left;
-	  color: #1f8dd6;
-	  background-color: #c9e0ff;
-	  border: 0;
-	  margin-top: 30px;
-	  text-align: right;
-	}
-	
-	
 	
 	.simple-horizontal ul {
 	  padding-left: 0;
@@ -72,28 +59,6 @@
 	
 	.navbar-default .navbar-nav>li>a {
 	  color: #fff;
-	}
-	
-	@media (min-width:768px) {
-	  .editor_container {
-		max-width: 620px;
-	  }
-	}
-	
-	.navbar-nav {
-	  margin-left: 75px;
-	}
-	
-	#editor {
-	  min-height: 500px;
-	}
-	
-	#error-box {
-	  margin: 10px 0;
-	}
-	
-	#error-message {
-	  display: none;
 	}
 	  
 	#brand, .navbar-default a, .navbar-brand a, .navbar-brand:hover, .navbar-default .navbar-brand:focus {
@@ -241,16 +206,19 @@
 		</div>
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		  <ul class="nav navbar-nav">
-			<li><a href="#">About</a></li>
-			<li><a href="#">How-To</a></li>
-			<li><a href="#">Docs</a></li>
-			<li><a href="#">API</a></li>
-			<li><a href="#">Contact</a></li>
+			<li><a href="/docs.html">Docs</a></li>
 		  </ul>
 		</div>
 	  </div>
 	</nav>
-    <div class="container-fluid">
+    <div class="container-fluid statement-headline">
+	  <div class="row">
+		<div class="col-md-12">
+		  <div id="statement"><h1>Create and Deploy Custom APIs Without Code</h1></div>
+		</div>
+	  </div>
+	</div>
+	<div class="container-fluid design-container">
 	  <div class="row">
 		<div class="col-md-12">
 		  <div id="error-box">
@@ -259,40 +227,28 @@
 		</div>
 	  </div>
       <div class="row">
-        <div class="col-md-5 headline">DESIGN<br/> API <br/>HERE <span style="right: 0" class="glyphicon glyphicon-arrow-right"></span></div>
-        <div class="col-md-7">
-		  <div class="editor_container">
-			<div class="simple-horizontal" id="samples">
-			  <ul>
-				  <li>SAMPLE APIS:</li>
-				  <li><a class="sample_api" id="todo_api_sample" href="#">To-Do List API</a></li>
-				  <li><a class="sample_api" id="meetup_api_sample" href="#">Meetups API</a></li>
-				  <li><a class="sample_api" id="schools_api_sample" href="#">Schools API</a></li>
-			  </ul>
+        <div class="col-md-5 col-sm-12 col-xs-12 headline">DESIGN<br/> API <br/>HERE <span style="right: 0" id="headline-arrow" class="glyphicon glyphicon-arrow-right arrow"></span></div>
+        <div class="col-md-7 col-sm-12 col-xs-12">
+		  <div class="row editor_container">
+			<div class="col-md-12 col-sm-12 col-xs-12">
+			  <div class="simple-horizontal" id="samples">
+				<ul>
+					<li>SAMPLE APIS:</li>
+					<li><a class="sample_api" id="todo_api_sample" href="#">To-Do List API</a></li>
+					<li><a class="sample_api" id="meetup_api_sample" href="#">Meetups API</a></li>
+					<li><a class="sample_api" id="blog_api_sample" href="#">Blog API</a></li>
+				</ul>
+			  </div>
+			  <div id="editor"></div>
+			  <div class="row">
+				<div class="col-md-4 help-link"><a href="docs.html">Need help getting started?</a></div>
+				<div class="col-md-4"><button id="makeAPIButton" style="display: block; margin: 10px auto" type="button" class="btn btn-success btn-lg ">Make my API!</button></div>
+			  </div>
 			</div>
-			<div id="editor"></div>
-			<button id="makeAPIButton" style="display: block; margin: 10px auto" type="button" class="btn btn-success btn-lg ">Make my API!</button>
 		  </div>
 		</div>
       </div>
     </div> <!-- /container -->
-
-<div class="modal fade bs-example-modal-sm" id="waiting" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-sm">
-    <div class="modal-content" id="modal-content">
-      <div class="modal-header">
-      </div>
-	  <div class="modal-body">
-        <span style="display: block">Your API is being deployed.</span>
-		<span style="display: block">(It only takes a minute)</span>
-		<span class="loader"><span class="loader-inner"></span></span>
-		<span id="modal-notification"></span>
-      </div>
-	  <div class="modal-footer">
-      </div>
-    </div>
-  </div>
-</div>
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="http://getbootstrap.com/assets/js/ie10-viewport-bug-workaround.js"></script>
@@ -357,7 +313,6 @@
 			.fail(function(data) {
 			  //alert(data.responseText);
 			  var errorMessage = JSON.parse(data.responseText);
-			  $('#waiting').modal('hide');
 			  $('#error-message').css("display", "block").html(errorMessage.value);
 			  $('#makeAPIButton').removeClass("btn-success").addClass("btn-danger").html('API Error!');
 			  window.scrollTo(0, 0);
@@ -367,68 +322,25 @@
 		  });	
 		}
 		
-		function pageReady(apiData) {
-		  confirmSuccess(apiData, loadSwagger);
-		}
-	  
-		function confirmSuccess(apiData, callback) {
-		  setTimeout(function() {
-			  console.log('API is ready.');
-			  $('.loader').hide() ;
-			  $('#modal-notification').html('<h3>Your API is ready.</h3><p>You will now be redirected to a Swagger client to start using it.</p>');
-			  if(typeof callback == 'function')
-				  callback(apiData);
-		  }, 500);
-		};
-	  
-		function loadSwagger(apiData) {
-		  setTimeout(function() {
-			window.location = "swagger.html?url=" + apiData._links.swaggerApiDescription.href;
-		  }, 2000);
-		};
-		
-		function waitTimeOut(apiData) {
-		  setTimeout(function() {
-			console.log('Page Timeout. Poll for API.');
-			$.ajax({
-			  url: apiData._links.self.href,
-			  type: "GET",
-			  dataType: "json"
-			})
-			  .done(function( data ) {
-				console.log( 'Polled API results: ' + JSON.stringify(data) );
-				checkStatus(data);
-			  })
-			  .fail(function(data) {
-				//alert(data.responseText);
-				var errorMessage = JSON.parse(data.responseText);
-				$('#waiting').modal('hide');
-				$('#error-message').css("display", "block").html("Something went wrong with your API. Please try again later.");
-				$('#makeAPIButton').removeClass("btn-success").addClass("btn-danger").html('API Error!');
-				window.scrollTo(0, 0);
-			  })
-			  .always(function() {
-				console.log( "Wait Timeout AJAX Fired." );
-			});
-		  }, maxWaitMs);
-		};
-		
-		function checkStatus(data){
-		  if(data.status == 'active') {
-			pageReady(data);
-		  } else {
-			$('#waiting').modal('hide');
-			$('#error-message').css("display", "block").html("Something went wrong with your API. Please try again later.");
-			$('#makeAPIButton').removeClass("btn-success").addClass("btn-danger").html('API Error!');
-			window.scrollTo(0, 0);
-		  }
-		}
-		
 		jQuery(function($){
+		  
+		  if ($(".headline").css("text-align") == "center" ){
+			$("#headline-arrow").removeClass( "glyphicon glyphicon-arrow-right" );
+			$("#headline-arrow").addClass( "glyphicon glyphicon-arrow-down" );
+		  };
+		  
+		  $(window).resize(function(){	
+			if ($(".headline").css("text-align") == "center" ){
+				  $("#headline-arrow").removeClass( "glyphicon glyphicon-arrow-right" );
+				  $("#headline-arrow").addClass( "glyphicon glyphicon-arrow-down" );
+			} else {
+			  $("#headline-arrow").removeClass( "glyphicon glyphicon-arrow-down" );
+			  $("#headline-arrow").addClass( "glyphicon glyphicon-arrow-right" );
+			}
+		  });
 		  
 		  // GET INPUT VALUE
 		  $( "#makeAPIButton" ).click(function() {
-			$('#waiting').modal('show');
 			getCurrentInput(function(err, indata){
 			  if(err){
 				console.log(err);

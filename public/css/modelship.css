@@ -2,6 +2,10 @@
       padding-top: 70px;
       background-color: #c9e0ff;
     }
+    
+  blockquote {
+    border-left: 5px solid #1f8dd6;
+  }
   
   .table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td {
     border-top: 0px solid #ddd;
@@ -10,12 +14,37 @@
   .table {
     margin-bottom: 5px;
   }
+  
+  .navbar-default {
+    background-color: #1f8dd6;
+    border-color: #1f8dd6;
+  }
 
+  .navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus {
+      color: #fff;
+      background-color: #156193;
+  }
+  
+  .navbar-default .navbar-nav>li>a:hover, .navbar-default .navbar-nav>li>a:focus {
+      color: #fff;
+      background-color: #156193;
+  }
 
+  #statement h1 {
+    font-size: 36px;
+    font-family: 'Open Sans', sans-serif;
+    color: #000;
+    border: 0;
+    margin: 0 0 20px 0;
+    text-align: center;
+  }
+
+  .statement-headline {
+    border-bottom: 2px dashed #1f8dd6;
+  }
   .headline {
 	  font-size: 100px;
 	  font-family: 'Open Sans', sans-serif;
-	  text-align: left;
 	  color: #1f8dd6;
 	  background-color: #c9e0ff;
 	  border: 0;
@@ -23,8 +52,29 @@
 	  text-align: right;
 	}
 	
+  @media (max-width:992px) {
+    .headline {
+      font-size: 100px;
+      font-family: 'Open Sans', sans-serif;
+      color: #1f8dd6;
+      background-color: #c9e0ff;
+      border: 0;
+      margin-top: 30px;
+      text-align: center;
+    }
+
+  }
+  
+  .help-link {
+    margin: 10px auto;
+    text-align: right;
+    padding: 10px 0;
+  }
 	
-	
+  .design-container {
+    padding-top: 30px;
+  }
+  
 	.simple-horizontal ul {
 	  padding-left: 0;
 	  margin-bottom: 3px;
@@ -56,14 +106,10 @@
 	  color: #fff;
 	}
 	
-	@media (min-width:768px) {
+    @media (min-width:992px) {
 	  .editor_container {
 		max-width: 620px;
 	  }
-	}
-	
-	.navbar-nav {
-	  margin-left: 75px;
 	}
 	
 	#editor {

@@ -165,6 +165,80 @@ samples['todo_api_sample'] = {
     }
   ]
 };
+samples['blog_api_sample'] = {
+  "apiName"         : "blog_api",
+  "resources" : [
+    {
+        "name"        : "posts",
+        "model"       : "posts",
+        "resources"   : [
+          {
+            "name"        : "tags",
+            "model"       : "tags"
+          },
+          {
+            "name"        : "authors",
+            "model"       : "authors"
+          }
+        ]
+    },
+    {
+        "name"        : "authors",
+        "model"       : "authors",
+        "resources"   : [
+          {
+            "name"        : "posts",
+            "model"       : "posts"
+          }
+        ]
+    }
+  ],
+  "models"  : [
+    {
+      "title": "posts",
+      "isCollection"  : true,
+      "hasNamedInstances" : true,
+      "type": "object",
+      "properties": {
+          "title": {
+              "type": "string"
+          },
+          "content": {
+              "type": "string"
+          }
+      }
+    },
+    {
+      "title" : "tags",
+      "isCollection"  : true,
+      "hasNamedInstances" : true,
+      "type": "object",
+      "properties": {
+        "description": {
+            "type": "string"
+        }
+      }
+    },
+    {
+      "title" : "authors",
+      "isCollection"  : false,
+      "hasNamedInstances" : false,
+      "type": "object",
+      "properties": {
+        "firstName": {
+            "type": "string"
+        },
+        "lastName"    : {
+            "type": "string"
+        },
+        "emailAddress" : {
+            "type" : "string"
+        }
+      }
+    }
+  ]
+};
+
 
 function tryParseJSON (jsonString){
     try {

@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="./img/favicon.ico">
+
+        <title>ModelShip</title>
+
+        <link href="./css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="./css/font-awesome-4.0.3.css" rel="stylesheet">
+        <link href="./css/prettify-1.0.css" rel="stylesheet">
+        <link href="./css/base.css" rel="stylesheet">
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+    </head>
+
+    <body>
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a id="brand" class="navbar-brand" href="#">Model<strong>Ship</strong></a>
+      </div>
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li><a href="#">About</a></li>
+          <li><a href="#">How-To</a></li>
+          <li><a href="#">Docs</a></li>
+          <li><a href="#">API</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+</nav>
+<!-- 
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <a class="navbar-brand" href="/">ModelShip</a>
+        </div>
+
+        <div class="navbar-collapse collapse">
+
+            <ul class="nav navbar-nav">
+            
+            
+                <li >
+                    <a href="/docs/docs.html">How-To</a>
+                </li>
+            
+            
+            </ul>
+
+        </div>
+    </div>
+</div>
+-->
+        <div class="container">
+            <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+    
+        <li class="main active"><a href="#api-guide">API Guide</a></li>
+        
+            <li><a href="#api-design-principles">API Design Principles</a></li>
+        
+            <li><a href="#getting-started-generating-an-api">Getting Started Generating an API</a></li>
+        
+            <li><a href="#modelship-json-structure-overview">ModelShip JSON structure overview</a></li>
+        
+            <li><a href="#api-options-and-metadata">API options and metadata</a></li>
+        
+            <li><a href="#resources-array">Resources Array</a></li>
+        
+            <li><a href="#models-array">Models Array</a></li>
+        
+            <li><a href="#resource-relationships">Resource relationships</a></li>
+        
+    
+    </ul>
+</div></div>
+            <div class="col-md-9" role="main">
+
+<style>
+.navbar-default {
+    background-color: #1f8dd6;
+    border-color: #1f8dd6;
+}
+
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus {
+    color: #fff;
+    background-color: #156193;
+}
+
+.navbar-default .navbar-nav>li>a:hover, .navbar-default .navbar-nav>li>a:focus {
+    color: #fff;
+    background-color: #156193;
+}
+
+
+</style>
+
+<h1 id="api-guide">API Guide</h1>
+<blockquote>
+<p><strong>Design, build and deploy APIs without coding</strong></p>
+</blockquote>
+<p>ModelShip is a tool that lets you design, build and deploy APIs without coding. It lets you focus on the key concepts you want in your application, and automatically applies best-practices in API design so you don't have to. In short, you tell us about the <a href="./how-to/#resources-array">things</a> in your application, and <a href="./how-to/#resources-array">how they relate to each other</a>, and ModelShip will do the rest.</p>
+<p>What is 'the rest', you might ask? ModelShip will take your design, and create a series of API endpoints that conform to modern REST API design principles and best-practices. We also automatically generate a Swagger file that you can use for interactive documentation of your API, and we deploy your API to the cloud so you can begin using it immediately. </p>
+<p>This short guide should help you get on your way to building and using your first ModelShip API. There are two things you need to understand to use ModelShip to generate your APIs.</p>
+<ol>
+<li>Principle behind ModelShip API Design</li>
+<li>The ModelShip API JSON Description (how to generate an API)</li>
+</ol>
+<h2 id="api-design-principles">API Design Principles</h2>
+<blockquote>
+<p><strong>Good API Design is both opinionated and intuitive.</strong></p>
+</blockquote>
+<p>In the best tradition of APIs, we want to <strong>maximize reuse</strong> and we don't want to re-invent the wheel. ModelShip takes really excellent API patterns and leverages them extensively in to create your APIs. In particular, we lean heavily on two patterns that you can read more about: </p>
+<ul>
+<li>
+<p><a href="http://www.narwhl.com">NARWHL (Noun as Resource With HyperLinks)</a> - Rob Zazueta (@rzazueta) has created a fantastic guide to good API design. ModelShip shares most of Rob's views on API design, and implements many of the recommended patterns (with more to come). We recommend Rob's guide as a great starting point for understanding the structure and design of your new API.</p>
+</li>
+<li>
+<p><a href="https://github.com/mikekelly/hal_specification">JSON+HAL</a> - There's a lot of talk lately about hypermedia links in APIs, and how we can truly fulfill the vision of "Hypermedia as the Engine of Application State". ModelShip has some thoughts and ideas about that, but the most influential and usable work on hypermedia to date comes from Mike Kelly (@mikekelly85). Mike came up with the JSON+HAL media-type, and it's what we use in ModelShip to link between resources. </p>
+</li>
+</ul>
+<h2 id="getting-started-generating-an-api">Getting Started Generating an API</h2>
+<blockquote>
+<p><strong>ModelShip is a tool for creating and deploying working APIs instantly, without any code.</strong></p>
+</blockquote>
+<p>Getting started with ModelShip is easy. Simply define your resources using ModelShip's JSON structure, hit submit and let ModelShip handle the rest. We have some basic pre-filled APIs on our homepage that you can use to understand how a ModelShip design turns into an API.</p>
+<h2 id="modelship-json-structure-overview">ModelShip JSON structure overview</h2>
+<blockquote>
+<p><strong>All ModelShip APIs start with a simple JSON spec</strong>.</p>
+</blockquote>
+<p>ModelShip's JSON structure is straightforward and easy to master. It is comprised of three components:</p>
+<ol>
+<li>API options and metadata</li>
+<li>Resources Array - Define the relationships between resources</li>
+<li>Models Array - Resources defined by JSON Schema</li>
+</ol>
+<p><br/>
+Here is a condensed version of a ModelShip JSON API design.
+<br/></p>
+<pre class="prettyprint well"><code>    {
+        "apiName"       : "api.name.goes.here",
+        "mediaType"     : "application/json+hal",
+        "webhookUrl"    : "your.webhook.url",
+        "resources" : [
+          {
+            ...
+          }
+        ],
+        "models"  : [
+          {
+            ...
+          }
+        ]
+    }
+</code></pre>
+<h2 id="api-options-and-metadata">API options and metadata</h2>
+<blockquote>
+<p><strong>Basic information about your API</strong>.</p>
+</blockquote>
+<p>In order to build your API, ModelShip must get some basic information from you about the API. The following attributes are all at the top level of the ModelShip JSON structure. The only required information is the name of your API, while the other fields here are optional. </p>
+<pre class="prettyprint well"><code>    "apiName"       : "api.name.goes.here",
+    "mediaType"     : "application/json+hal",
+    "webhookUrl"    : "your.webhook.url",
+</code></pre>
+<ul>
+<li><strong>apiName (required)</strong> - The name of your API. API names can consist of numbers, upper and lowercase letters (a-z) and the underscore character (_) . All other characters are invalid and will be rejected. </li>
+<li><strong>mediaType (optional)</strong> - Represents the desired content or media-type that your API will handle for both API requests and responses. Currently the only accepted values are application/json and application/json+hal. Regardless of which one is chosen, currently API responses will always return data in the <a href="https://github.com/mikekelly/hal_specification">JSON+HAL format</a>. If not specified, the mediaType defaults to application/json+hal. </li>
+<li><strong>webhookUrl (optional)</strong> - When an API is deployed, it takes between a few seconds and a minute to become functional. Your application can receive a notification of a successful deployment at this URL in the form of a POST request.</li>
+</ul>
+<h2 id="resources-array">Resources Array</h2>
+<blockquote>
+<p><strong>The 'things' you want to interact with in your API and their relationships to each other</strong>.</p>
+</blockquote>
+<p>'Resources' is a top-level attribute of the ModelShip JSON structure, and it contains an array of resources that will exist in your API. Each resource in this array specifies the name of the resource and the associated model definition of the resource (currently required to be the same). Additionally, each resource can itself contain an array of resources. </p>
+<pre class="prettyprint well"><code>"resources" : [
+    { 
+       "name" : "items",
+       "model" : "items",
+       "resources" : [
+            {
+               "name" : "lists",
+               "model" : "lists"
+            }
+        ]
+    } 
+]
+</code></pre>
+<p>Beyond the hierarchical relationships defined this way, ModelShip also defines a relationship between resources at different parts of the tree that share the same name. </p>
+<p>By defining the resources array this way, a relationship map of resources emerges. Please see the 'resource relationships' section for further explanation and some examples. </p>
+<p>Currently each resource can have the following attributes:</p>
+<ul>
+<li><strong>name (string, required)</strong> - The name of the resource. Currently the value of 'name' must match the value of 'model'.  </li>
+<li><strong>model (string, required)</strong> - The associated model of the resource, specified in the models array. The value of 'model' currently must match the value of the 'name' attribute, AND it MUST ALWAYS match the 'title' attribute of a model object that is being referenced from the models array. </li>
+<li><strong>resources (array, optional)</strong> - If a resource contains sub-resources, then they are defined within this nested resources array. Resource arrays can be nested up to 20 levels of depth. </li>
+</ul>
+<h2 id="models-array">Models Array</h2>
+<blockquote>
+<p><strong>Defining the 'things' of your API</strong>.</p>
+</blockquote>
+<p>The models array is an array of objects, each object a subset of JSON Schema, defining the properties that a resource can contain. Read more about JSON Schema here (link to JSON Schema page). </p>
+<pre class="prettyprint well"><code>"models": [
+    {
+        "title": "items",
+        "isCollection": true,
+        "hasNamedInstances": true,
+        "type": "object",
+        "properties": {
+            "description": {
+                "type": "string"
+            },
+            "priority": {
+                "type": "string"
+            },
+            "dueDate": {
+                "type": "string"
+            }
+        }
+    },
+    {
+        ...
+    }
+]
+</code></pre>
+<p>Each model object must have the following properties:</p>
+<ul>
+<li><strong>title (string, required)</strong> - The name of the model. The title property SHOULD match the model property from a resource specified in the 'resources' array.</li>
+<li><strong>type (string, required)</strong> - The data type of the model. For a valid ModelShip resource, this value MUST be set to 'object'.</li>
+<li><strong>properties (object, required)</strong> - An object that lists out the properties of the resource model being defined. Please see here (http://www.json-schema.org) for instructions on how to construct a valid JSON Schema 'properties' object. Alternatively you can take a look at the examples provided on our landing page to get started quickly.</li>
+<li><strong>isCollection (boolean, required)</strong> - Specify whether or not the resource model represents a collection of things, or whether it represents a single item. Accepted values are [true/false].</li>
+<li><strong>hasNamedInstances (boolean, required)</strong> - Specify whether or not an API client names new resource instances of a collection that get created. For example, if a resource collection called 'widgets' exists in the newly created API and 'hasNamedInstances' is set to true, then to create a widget called "my-thing" you would make the following request: PUT /widgets/my-thing. Subsequent requests to retrieve this new resource would be made to /widgets/my-thing. </li>
+</ul>
+<p>If, on the other hand, you wanted the API to create IDs for new widgets in the collection, you would set 'hasNamedInstances' to false, and subsequently to create a new widget you would make the following request: POST /widgets. The result of that API call would be a new resource with a URL of /widgets/fj32offd or some other randomly generated ID. </p>
+<p>'hasNamedInstances' only applies in cases where 'isCollection' is set to true. Accepted values are [true/false].</p>
+<h2 id="resource-relationships">Resource relationships</h2>
+<blockquote>
+<p><strong>The ways that the things in your API relate to each other</strong>.</p>
+</blockquote>
+<p>One of the main benefits of ModelShip is that it has built in support for relationships between resources. This capability takes ModelShip beyond the realm of scaffolding and CRUD, and starts to take us into the world of real application functionality. There will be a lot more to say about that in the future, but for now let's dive in to how those relationships work.</p>
+<p>There are currently two kinds of relationships that resources can have with each other in a ModelShip API design. </p>
+<ol>
+<li>Parent/Child </li>
+<li>Scope</li>
+</ol>
+<h3 id="parent-child">Parent / Child</h3>
+<p>Parent child relationships are straightforward. If I have a collection resource called 'classrooms' and I have a separate collection resource called 'students', I might want to have some functionality that lists all the students in a certain classroom. In that case, classrooms is the parent resource, and students is the child resource.
+In the ModelShip paradigm, I could accomplish this easily by specifying this relationship in the Resources Array. I would first specify a resource called classrooms, and then within that resource, I would nest a resources array and place a students resource into the classrooms sub-resource. It would look like this:</p>
+<pre class="prettyprint well"><code>"resources" : [
+    { 
+       "name" : "classrooms",
+       "model" : "classrooms",
+       "resources" : [
+            {
+               "name" : "students",
+               "model" : "students"
+            }
+        ]
+    } 
+]
+</code></pre>
+<p>Once the API is created, the URL representing this relationship would be:</p>
+<pre class="prettyprint well"><code>your-api.modelship.com/classrooms/{classroomId}/students
+</code></pre>
+<p>Establishing parent/child relationships this easily offers you powerful functionality in designing your APIs.</p>
+<h3 id="scope">Scope</h3>
+<p>To illustrate the scope relationship, let's continue with the classroom/students example. We have already established a parent/child relationship between the aforementioned resources, but now you need to be able to see a list of all students, regardless of their relationship to a classroom. </p>
+<p>With ModelShip we make this easy. Let's take the resources array we just created and make a quick addition:</p>
+<pre class="prettyprint well"><code>"resources" : [
+    { 
+       "name" : "classrooms",
+       "model" : "classrooms",
+       "resources" : [
+            {
+               "name" : "students",
+               "model" : "students"
+            }
+         ]
+    },
+    { 
+           "name" : "students",
+           "model" : "students",
+    }
+]
+</code></pre>
+<p>That's all there is to it. We just added a students resource at the top level, and when you publish your API, the relationship between that top-level resource and the nested students resource under classrooms is automatically established. </p>
+<p>So if you were to add a few students to a certain classroom with the following call (one for each new student): 
+    POST /classrooms/{classroomId}/students</p>
+<p>…those students would show up the next time you made a call to:
+    GET /students</p>
+<p>On the other hand, if you were to add a student with the following call:
+    POST /students</p>
+<p>…that student would NOT show up under any classroom, because that student was created without a relationship to a classroom.</p>
+<p>Let's take it one final step. You've now created a students resource at the top level, and a students resource that is a child to a classrooms resource. But what about when you've created a student at the top level, and then later want to add that student to a classroom? Again, this is made easy within the structure of the resources array. </p>
+<pre class="prettyprint well"><code>"resources" : [
+    { 
+       "name" : "classrooms",
+       "model" : "classrooms",
+       "resources" : [
+            {
+               "name" : "students",
+               "model" : "students"
+            }
+        ]
+    },
+    { 
+       "name" : "students",
+       "model" : "students",
+       "resources" : [
+            {
+               "name" : "classrooms",
+               "model" : "classrooms"
+            }
+       ]
+    }
+]
+</code></pre>
+<p>By now I'm sure you're getting the hang of it. This new child classrooms resource shares the same data with the top-level classrooms resources we established earlier. And by nesting it as a child to a top-level students resource we gain the flexibility to add a classroom to any student at any time.</p>
+<p>And just to make it clear as to what you're getting when you create the resource tree above, here are the endpoints that get created*:</p>
+<pre class="prettyprint well"><code>GET     /classrooms
+POST    /classrooms
+GET     /classrooms/{classroomId}
+PUT     /classrooms/{classroomId}
+DELETE  /classrooms/{classroomId}
+
+GET     /classrooms/{classroomId}/students
+POST    /classrooms/{classroomId}/students
+GET     /classrooms/{classroomId}/students/{studentId}
+PUT     /classrooms/{classroomId}/students/{studentId}
+DELETE  /classrooms/{classroomId}/students/{studentId}
+
+GET     /students
+POST    /students
+GET     /students/{studentId}
+PUT     /classrooms/{studentId}
+DELETE  /classrooms/{studentId}
+
+GET     /students/{studentId}/classrooms
+POST    /students/{studentId}/classrooms
+GET     /students/{studentId}/classrooms/{classroomId}
+PUT     /classrooms/{studentId}/classrooms/{classroomId}
+DELETE  /classrooms/{studentId}/classrooms/{classroomId}
+</code></pre>
+<p>*assumes that isCollection = true and hasNamedInstances=false for both the students and classrooms resource models.</p>
+<p>By allowing you to create resource relationships that share data across the hierarchy of your API, you can easily design and manage the scope of a resource. </p>
+<p>20 endpoints and a whole heap of flexibility built and deployed automatically. Now ask yourself - how much time did that just save you?</p>
+</div>
+        </div>
+
+        
+
+        <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+        <script src="./js/bootstrap-3.0.3.min.js"></script>
+        <script src="./js/prettify-1.0.min.js"></script>
+        <script src="./js/base.js"></script>
+    </body>
+</html>
