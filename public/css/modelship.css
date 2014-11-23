@@ -15,6 +15,15 @@
     margin-bottom: 5px;
   }
   
+  .alert-warning {
+    color: #fff;
+    background-color: #e99002;
+    border-color: #d08002;
+    border-radius: 0;
+    font-size: 12px;
+    font-weight: 300;
+  }
+  
   .navbar-default {
     background-color: #1f8dd6;
     border-color: #1f8dd6;
@@ -73,6 +82,10 @@
 	
   .design-container {
     padding-top: 30px;
+  }
+  
+  .header-text h1 {
+    margin-bottom: 0px; 
   }
   
 	.simple-horizontal ul {
@@ -152,7 +165,7 @@
 	}
     
     .feature-box:hover {
-	  border: 3px solid #FFF;
+	  border: 1px solid #FFF;
 	}
 	
 	.loader {
@@ -379,6 +392,12 @@
       background-position: center;
     }
     
+    #api-status {
+      background-color: #000;
+      font-family: "Courier", monospace;
+      color: #fff;
+    }
+    
     #swagger-box {
       background-image: url("../img/swagger-logo.png");
       background-color: #fff;
@@ -423,11 +442,4 @@
     
     a #feature-try:hover {
       background-color: #e0fde0;
-    }
-    
-    #api-info-box {
-      display: block;
-      background-color: rgba(255,255,255,0.5);
-      padding: 0 15px 15px 15px;
-      border: 1px solid #000;
     }

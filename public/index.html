@@ -285,6 +285,10 @@
 		  }
 		};
 		
+		function layoutTest(){
+		  window.location = 'http://localhost:8000/status.html?id=12345';
+		}
+		
 		function loadSample(sample_api) {
 		  editor.setValue(JSON.stringify(samples[sample_api], null, '\t'));
 		  editor.clearSelection(1);
@@ -341,13 +345,14 @@
 		  
 		  // GET INPUT VALUE
 		  $( "#makeAPIButton" ).click(function() {
-			getCurrentInput(function(err, indata){
+			layoutTest();
+			/*getCurrentInput(function(err, indata){
 			  if(err){
 				console.log(err);
 			  } else {
 				sendInput(indata);
 			  }
-			});
+			});*/
 		  });
 		  
 		  $( ".sample_api" ).click(function(event) {
