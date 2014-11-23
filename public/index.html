@@ -345,14 +345,13 @@
 		  
 		  // GET INPUT VALUE
 		  $( "#makeAPIButton" ).click(function() {
-			layoutTest();
-			/*getCurrentInput(function(err, indata){
+			getCurrentInput(function(err, indata){
 			  if(err){
 				console.log(err);
 			  } else {
 				sendInput(indata);
 			  }
-			});*/
+			});
 		  });
 		  
 		  $( ".sample_api" ).click(function(event) {
