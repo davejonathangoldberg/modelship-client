@@ -126,7 +126,7 @@
 	}
     
     @media (min-width: 1200px) {
-      .container {
+      #resources_container {
         width: 970px;
       }
     }
