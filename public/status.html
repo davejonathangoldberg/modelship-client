@@ -62,11 +62,7 @@
 		  <div class="feature-box" id="api-status">
 			<table id="api-info-box" class="table table-condensed">
 			  <tr>
-				<th>ID:</th>
-				<td id="modelship-id"></td>
-			  </tr>
-			  <tr>
-				<th>API Status:</th>
+				<th style="width: 120px">API Status:</th>
 				<td class="status">
 				  <div class="sm-spinner">
 					<span id="api-status">Pending</span>
@@ -81,15 +77,17 @@
 				<td id="api-url"></td>
 			  </tr>
 			  <tr>
-				<th>Swagger URL:</th>
-				<td id="swagger-url"></td>
+				<th colspan="2">Swagger URL:</th>
+			  </tr>
+			  <tr>
+				<td colspan="2" id="swagger-url"></td>
 			  </tr>
 			</table>
 			<div class="feature-headline">STATUS</div>
 		  </div>
 		</div>
 		<div class="col-md-4 col-sm-6 col-xs-12">
-		  <a href="#">
+		  <a href="docs.html">
 			<div class="feature-box" id="fb-api-guide">
 			  <span data-toggle="tooltip" data-placement="left" title="The API Guide will walk you through your new API's design and capabilities." class="feature-hint"></span>
 			  <div class="feature-headline">GUIDE</div>
@@ -99,7 +97,7 @@
 		<div class="col-md-4 col-sm-6
 		col-xs-12">
 		  <a id="swagger-box-link" href="#">
-			<div class="feature-box" id="swagger-box" style="display: block ">
+			<div class="feature-box" id="swagger-box" style="display: none ">
 			  <span data-toggle="tooltip" data-placement="left" title="Use your API here using Swagger. Swagger gives you interactive documentation for your API." class="feature-hint"></span>
 			  <div class="feature-headline" id="feature-headline-swagger">TRY IT OUT</div>
 			</div>
@@ -117,17 +115,20 @@
 	<script type="text/javascript" src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs" data-app-key="0xa7hf3zp4sz47y"></script>
 	<script src="js/modelship.js" type="text/javascript" charset="utf-8"></script>
 	<script>
-	var socket = io();
-	var apiId = urlParams['id'];
 	$(function () {
+	  var socket = io();
+	  var apiId = urlParams['id'];
 	  console.log('API ID: ' + apiId);
 	  $('[data-toggle="tooltip"]').tooltip()
 	  socket.emit('newApp', apiId);
 	  $("#modelship-id").html(apiId);
 	  $("#modelship-url").html('<a href="http://www.modelship.io/status.html?id=' + apiId + '">http://www.modelship.io/status.html?id=' + apiId + '</a>');
 	  getApiData(apiId);
-	
-	
+	  if(apiId == "12345"){
+		setTimeout(function(){
+		  pageReady(samples['testResponse'])
+		}, 3000);
+	  };
 	})
 	
 	socket.on('appReady', function (data) {

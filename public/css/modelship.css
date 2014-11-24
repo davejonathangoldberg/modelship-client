@@ -124,6 +124,12 @@
 		max-width: 620px;
 	  }
 	}
+    
+    @media (min-width: 1200px) {
+      .container {
+        width: 970px;
+      }
+    }
 	
 	#editor {
 	  min-height: 500px;
@@ -167,6 +173,25 @@
     .feature-box:hover {
 	  border: 1px solid #FFF;
 	}
+    
+    .feature-box table {
+      table-layout: fixed;
+    }
+    
+    .feature-box table a {
+      color: #FFF;
+      text-decoration: underline;
+      font-size: 12px;
+    }
+    
+    .feature-box table a:hover {
+      color: #FFF;
+      font-weight: bold;
+    }
+    
+    .feature-box table td {
+      word-wrap: break-word;
+    }
 	
 	.loader {
 	  display: inline-block;

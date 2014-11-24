@@ -238,7 +238,27 @@ samples['blog_api_sample'] = {
     }
   ]
 };
-
+samples['testResponse'] = {
+  "_links": {
+    "self": {
+      "href": "http://104.131.83.125/apis/sj5mdftc07ldi"
+    },
+    "deployedApi": {
+      "href": "http://sample.api.url"
+    },
+    "modelshipApiDescription": {
+      "href": "http://104.131.83.125/apis/sj5mdftc07ldi/api-sec"
+    },
+    "swaggerApiDescription": {
+      "href": "http://104.131.83.125/apis/sj5mdftc07ldi/swagger"
+    }
+  },
+  "id": "sj5mdftc07ldi",
+  "apiName": "todo_api",
+  "status": "active720",
+  "createdDate": "2014-11-09T22:51:03.043Z",
+  "modifiedDate": "2014-11-09T22:51:48.201Z"
+};
 
 function tryParseJSON (jsonString){
     try {
