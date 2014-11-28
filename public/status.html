@@ -129,12 +129,13 @@
 		  pageReady(samples['testResponse'])
 		}, 3000);
 	  };
+	  socket.on('appReady', function (data) {
+	    console.log('appReady: ' + JSON.stringify(data));
+	    pageReady(data);
+	  });
 	})
 	
-	socket.on('appReady', function (data) {
-		console.log('appReady: ' + JSON.stringify(data));
-		pageReady(data);
-	  });
+	
 	
 	function getApiData(id) {
 	  // SEND INPUT TO SERVER
