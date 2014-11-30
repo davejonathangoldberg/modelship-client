@@ -2,7 +2,9 @@
 
 // REQUIRED LIBRARIES
 var http = require('http');
+var https = require('https');
 var fs = require('fs');
+var Mailgun = require('mailgun-js');
 
 // REQUIRED CLASSES
 var App = require("./app.js");
@@ -128,6 +130,43 @@ app.post('/inbound_hooks', function(req, res, next){
   console.log('req.method: ' + req.method);
   io.sockets.in(req.body['id']).emit('appReady', req.body);
   return res.status(200).send(req.body['id']);
+});
+
+app.post('/contact_form', function(req, res, next){
+  //Your api key, from Mailgun’s Control Panel
+  var api_key = 'key-57da3f8bb02d6cf063000b20d3d67ef5';
+  var domain = 'mg.modelship.io';
+  var from_who = 'dave@mg.modelship.io';
+
+  console.log('req.body: ' + req.body);
+  
+  var mailgun = new Mailgun({apiKey: api_key, domain: domain});
+
+  var data = {
+    from: from_who,
+  //The email to contact
+    to: req.body['contact-form-email'],
+  //Subject and text data  
+    subject: 'ModelShip - New comment from ' + req.body['contact-form-name'],
+    html: req.body['contact-form-comments']
+  }
+
+  //Invokes the method to send emails given the above data with the helper library
+  mailgun.messages().send(data, function (err, body) {
+      //If there is an error, render the error page
+      if (err) {
+          res.status(500).json({"error" : "Send mail failure"});
+          return console.log('got an error: ', err);
+      }
+      //Else we can greet    and leave
+      else {
+          //Here "submitted.jade" is the view file for this landing page 
+          //We pass the variable "email" from the url parameter in an object rendered by Jade
+          res.status(200).json({"sendStatus" : "Success"});
+          return console.log(body);
+      }
+  });
+  
 });
 
 app.post('*', function(req, res, next){

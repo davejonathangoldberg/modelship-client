@@ -208,6 +208,7 @@
 		  <ul class="nav navbar-nav">
 			<li><a href="/docs.html">Docs</a></li>
 			<li><a href="/faq.html">FAQ</a></li>
+			<li><a href="/contact.html">Contact</a></li>
 		  </ul>
 		</div>
 	  </div>
@@ -309,21 +310,21 @@
 			contentType: "application/json",
 			data: JSON.stringify(indata),
 		  })
-			.done(function( data ) {
-			  console.log( JSON.stringify(data) );
-			  console.log('newAppId: ' + data.id);
-			  window.location = 'http://www.modelship.io/status.html?id=' + data.id;
-			  
-			})
-			.fail(function(data) {
-			  //alert(data.responseText);
-			  var errorMessage = JSON.parse(data.responseText);
-			  $('#error-message').css("display", "block").html(errorMessage.value);
-			  $('#makeAPIButton').removeClass("btn-success").addClass("btn-danger").html('API Error!');
-			  window.scrollTo(0, 0);
-			})
-			.always(function() {
-			  console.log( "finished" );
+		  .done(function( data ) {
+			console.log( JSON.stringify(data) );
+			console.log('newAppId: ' + data.id);
+			window.location = 'http://www.modelship.io/status.html?id=' + data.id;
+			
+		  })
+		  .fail(function(data) {
+			//alert(data.responseText);
+			var errorMessage = JSON.parse(data.responseText);
+			$('#error-message').css("display", "block").html(errorMessage.value);
+			$('#makeAPIButton').removeClass("btn-success").addClass("btn-danger").html('API Error!');
+			window.scrollTo(0, 0);
+		  })
+		  .always(function() {
+			console.log( "finished" );
 		  });	
 		}
 		
